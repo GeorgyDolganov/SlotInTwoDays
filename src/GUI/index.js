@@ -9,6 +9,7 @@ export default class GUI extends Phaser.GameObjects.Container {
         super(scene, x, y, children)
         this.spinButton = new SpinButton(scene, 350, 450, actions.spin)
         this.header = new Header(scene, 0, 0)
+
         scene.add.existing(this)
     }
 }

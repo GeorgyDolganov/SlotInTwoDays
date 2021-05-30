@@ -1,14 +1,15 @@
 import "core-js";
 import "regenerator-runtime";
 import Phaser from 'phaser'
-import BARPNG from '../src/assets/BAR.png'
-import TwoBARPNG from '../src/assets/2xBAR.png'
-import ThreeBARPNG from '../src/assets/3xBAR.png'
-import SevenPNG from '../src/assets/7.png'
-import CherryPNG from '../src/assets/Cherry.png'
-import SpinnerSVG from '../src/assets/Spinner.svg'
+import BARPNG from './assets/BAR.png'
+import TwoBARPNG from './assets/2xBAR.png'
+import ThreeBARPNG from './assets/3xBAR.png'
+import SevenPNG from './assets/7.png'
+import CherryPNG from './assets/Cherry.png'
+import SpinnerSVG from './assets/Spinner.svg'
 import Spin from './Spin'
 import GUI from './GUI'
+import io from "./io";
 
 
 
@@ -23,15 +24,17 @@ class TestSlot extends Phaser.Scene {
         this.load.image('3xBAR', ThreeBARPNG)
         this.load.image('7', SevenPNG);
         this.load.image('Cherry', CherryPNG)
-
         this.load.svg('spinner', SpinnerSVG)
     }
 
     create() {
+        const canvas = document.getElementsByTagName('canvas')
+        canvas[0].style.margin = 'auto'
         this.cameras.main.backgroundColor.setTo(0, 93, 80);
         this.spin = new Spin(this, 280, 0)
         this.GUI = new GUI(this, 0, 0, null, {
             spin: () => {
+                io.spin()
                 console.log('spin')
                 this.spin.reelsManager.start()
             }
